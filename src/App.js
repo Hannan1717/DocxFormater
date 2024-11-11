@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import {
-  AlignmentType,
   Document,
   Packer,
   Paragraph,
   TextRun,
-  UnderlineType,
 } from 'docx';
 
 function App() {
@@ -55,10 +53,10 @@ function App() {
             quickFormat: true,
             run: {
               font: "Times New Roman",
-              size: 24, // 12pt
+              size: 24,
             },
             paragraph: {
-              spacing: { line: 1.5 * 240 }, // 1.5 line spacing
+              spacing: { line: 1.5 * 240 },
             },
           },
           {
@@ -69,11 +67,11 @@ function App() {
             quickFormat: true,
             run: {
               font: "Times New Roman",
-              size: 24, // 12pt
+              size: 24,
             },
             paragraph: {
-              indent: { left: 720 }, // Indentation for options (0.5 inch)
-              spacing: { line: 1.5 * 240 }, // 1.5 line spacing
+              indent: { left: 720 },
+              spacing: { line: 1.5 * 240 },
             },
           },
           {
@@ -84,11 +82,11 @@ function App() {
             quickFormat: true,
             run: {
               font: "Times New Roman",
-              size: 24, // 12pt
+              size: 24,
             },
             paragraph: {
-              indent: { left: 720, hanging: 0 }, // Indentation and hanging indent for "Jawaban" and "Pembahasan"
-              spacing: { line: 1.5 * 240 }, // 1.5 line spacing
+              indent: { left: 720, hanging: 0 },
+              spacing: { line: 1.5 * 240 },
             },
           },
         ],
@@ -100,19 +98,16 @@ function App() {
             const optionRegex = /^[A-E]\./;
 
             if (questionRegex.test(line)) {
-              // Paragraph for questions
               return new Paragraph({
                 text: line,
                 style: "question",
               });
             } else if (optionRegex.test(line)) {
-              // Paragraph for options
               return new Paragraph({
                 text: line,
                 style: "option",
               });
             } else if (line.includes("Jawaban:") || line.includes("Pembahasan:")) {
-              // Paragraph for "Jawaban" or "Pembahasan"
               const isPembahasan = line.includes("Pembahasan:");
               const parts = isPembahasan ? line.split("Pembahasan:") : line.split("Jawaban:");
               return new Paragraph({
@@ -128,7 +123,6 @@ function App() {
                 style: "answerExplanation",
               });
             } else {
-              // Paragraph for any other content
               return new Paragraph({
                 text: line,
                 style: "question",
@@ -145,62 +139,42 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ padding: '20px' }}>
-      <h2>JSON to Markdown to Word Converter</h2>
-      <p>Masukkan JSON di bawah ini dan hasilkan Markdown serta file Word yang dapat diunduh.</p>
+    <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
+      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 space-y-4">
+        <h2 className="text-2xl font-bold text-gray-800">JSON to Markdown to Word Converter</h2>
+        <p className="text-gray-600">Masukkan JSON di bawah ini dan hasilkan Markdown serta file Word yang dapat diunduh.</p>
 
-      <div>
-        <label htmlFor="jsonInput">Masukkan JSON:</label>
-        <textarea
-          id="jsonInput"
-          rows="10"
-          value={jsonInput}
-          onChange={handleJsonInputChange}
-          placeholder="Masukkan JSON di sini"
-          style={{
-            width: '100%',
-            margin: '10px 0',
-            padding: '10px',
-            fontSize: '14px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-          }}
-        />
+        <div className="space-y-2">
+          <label htmlFor="jsonInput" className="block text-gray-700 font-medium">Masukkan JSON:</label>
+          <textarea
+            id="jsonInput"
+            rows="10"
+            value={jsonInput}
+            onChange={handleJsonInputChange}
+            placeholder="Masukkan JSON di sini"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="markdownOutput" className="block text-gray-700 font-medium">Hasil Markdown:</label>
+          <textarea
+            id="markdownOutput"
+            rows="10"
+            value={markdownOutput}
+            readOnly
+            placeholder="Hasil markdown akan muncul di sini..."
+            className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"
+          />
+        </div>
+
+        <button
+          onClick={convertToDocx}
+          className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          Convert to Word (DOCX)
+        </button>
       </div>
-
-      <div>
-        <label htmlFor="markdownOutput">Hasil Markdown:</label>
-        <textarea
-          id="markdownOutput"
-          rows="10"
-          value={markdownOutput}
-          readOnly
-          placeholder="Hasil markdown akan muncul di sini..."
-          style={{
-            width: '100%',
-            margin: '10px 0',
-            padding: '10px',
-            fontSize: '14px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-          }}
-        />
-      </div>
-
-      <button
-        onClick={convertToDocx}
-        style={{
-          padding: '10px 15px',
-          fontSize: '16px',
-          backgroundColor: '#4CAF50',
-          color: 'white',
-          border: 'none',
-          cursor: 'pointer',
-          borderRadius: '4px',
-        }}
-      >
-        Convert to Word (DOCX)
-      </button>
     </div>
   );
 }
