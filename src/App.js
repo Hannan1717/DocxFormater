@@ -142,10 +142,9 @@ function App() {
     <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
       <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6 space-y-4">
         <h2 className="text-2xl font-bold text-gray-800">JSON to Markdown to Word Converter</h2>
-        <p className="text-gray-600">Masukkan JSON di bawah ini dan hasilkan Markdown serta file Word yang dapat diunduh.</p>
 
         <div className="space-y-2">
-          <label htmlFor="jsonInput" className="block text-gray-700 font-medium">Masukkan JSON:</label>
+          <label htmlFor="jsonInput" className="block text-gray-700 font-medium">JSON:</label>
           <textarea
             id="jsonInput"
             rows="10"
@@ -157,7 +156,7 @@ function App() {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="markdownOutput" className="block text-gray-700 font-medium">Hasil Markdown:</label>
+          <label htmlFor="markdownOutput" className="block text-gray-700 font-medium">Markdown Result:</label>
           <textarea
             id="markdownOutput"
             rows="10"
