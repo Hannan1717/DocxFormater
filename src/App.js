@@ -162,7 +162,7 @@ function App() {
             rows="10"
             value={markdownOutput}
             readOnly
-            placeholder="Hasil markdown akan muncul di sini..."
+            placeholder="Markdown results will appear here..."
             className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"
           />
         </div>
