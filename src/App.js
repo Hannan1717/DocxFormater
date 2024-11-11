@@ -150,7 +150,7 @@ function App() {
             rows="10"
             value={jsonInput}
             onChange={handleJsonInputChange}
-            placeholder="Masukkan JSON di sini"
+            placeholder="Paste json here"
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
